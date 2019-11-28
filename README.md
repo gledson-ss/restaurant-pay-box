@@ -2,7 +2,7 @@
 
 ![69241613-e5a78500-0b7d-11ea-8833-23c3d9b69ddb](https://user-images.githubusercontent.com/43425195/69757651-46196200-113c-11ea-8533-1e191e90aa48.png)
 
-# Restaurant_pay_box
+# Restaurant Pay Box
 
 *Deseja-se um sistema que informatize o caixa de um restaurante. O sistema deve registrar os
 pedidos feitos pelos clientes a partir de uma comanda e informar o total a ser pago. Na comanda os
