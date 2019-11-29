@@ -12,5 +12,20 @@ dinheiro, cheque ou cartão de crédito. Deseja-se também que o sistema informe
 mais consumido e qual o menos consumido no restaurante. Deve também informar o total de
 gorjeta acumulada*
 
+## Requisitos Funcionais
 
+O sistema de caixa automatizado deve possuir as seguintes funções:
 
+  + Abertura do caixa
+  + Movimentação do caixa (recebimento, troco, etc.)
+  + Cadastro de produtos (código, descrição, preço, etc)
+  + Fornecimento de balanço
+  + Cadastro de garçons
+  
+ **Na movimentação do caixa, quando o cliente efetua o pagamento de sua conta, o sistema deve
+registrar o código do produto e a quantidade consumida. O sistema deve informar o preço a ser
+pago a cada item da conta ao lado da descrição do item e, no final, o subtotal, os 10% do garçom e
+o total final. O sistema deve guardar todas as contas contabilizadas. Cada produto registrado deve
+conter um código, uma descrição e o preço. O sistema deve ser capaz de informar o balaço atual do
+caixa: trata-se de uma listagem das datas/horas de cada conta paga com o seu respectivo valor
+total. Uma outra função exigida ao sistema é informar o total de gorjeta acumulada por um garçom. Cada comanda deve ter o código do garçom que serviu a mesa.**
