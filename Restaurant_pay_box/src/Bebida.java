@@ -7,7 +7,7 @@ public class Bebida implements Produto{
     private String descricao_bebida;
     
     // criando o construtor da classe
-    public bebida(String id_bebida, String descricao_bebida, float valor_bebida){
+    public Bebida(String id_bebida, String descricao_bebida, float valor_bebida) {
         this.id_bebida = id_bebida;
         this.descricao_bebida = descricao_bebida;
         this.valor_bebida = valor_bebida;
@@ -15,22 +15,34 @@ public class Bebida implements Produto{
 
 
     // getters and setters
-    public void setId_bebida(String id_bebida){
-        this.id_bebida = id_bebida;
-    }
-    public void setDescricao_bebida(String descricao_bebida){
-        this.descricao_bebida = descricao_bebida;
-    }
-    public void setValor_bebida(float valor_bebida){
-        this.valor_bebida = valor_bebida;
-    }
-    public String getId_bebida(){
+    @Override
+    public String getId_produto() {
         return id_bebida;
     }
-    public String getDescricao_bebida(){
+
+    @Override
+    public String getDescricao() {
         return descricao_bebida;
     }
-    public float getValor_bebida(){
+
+    @Override
+    public float getValor() {
         return valor_bebida;
+    }
+
+    @Override
+    public void setId_produto(String id_bebida) {
+        this.id_bebida = id_bebida;
+    }
+
+    @Override
+    public void setDescricao(String descicao_bebida) {
+        this.descricao_bebida = descicao_bebida;
+    }
+
+    @Override
+    public void setValor(float valor_bebida) {
+        this.valor_bebida = valor_bebida;
+
     }
 }

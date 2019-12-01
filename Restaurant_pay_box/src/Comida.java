@@ -15,22 +15,28 @@ public class Comida implements Produto{
 
 
     // getters and setters
-    public void setId_comida(String id_comida){
+    @Override
+    public void setId_produto(String id_comida){
         this.id_comida = id_comida;
     }
-    public void setDescricao_comida(String descricao_comida){
+    @Override
+    public void setDescricao(String descricao_comida){
         this.descricao_comida = descricao_comida;
     }
-    public void setValor_comida(float valor_comida){
+    @Override
+    public void setValor(float valor_comida){
         this.valor_comida = valor_comida;
     }
-    public String getId_comida(){
+    @Override
+    public String getId_produto(){
         return id_comida;
     }
-    public String getDescricao_comida(){
+    @Override
+    public String getDescricao(){
         return descricao_comida;
     }
-    public float getValor_comida(){
+    @Override
+    public float getValor(){
         return valor_comida;
     }
     
