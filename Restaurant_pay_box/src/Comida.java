@@ -33,9 +33,7 @@ public class Comida implements Produto{
     public float getValor_comida(){
         return valor_comida;
     }
-
     
 
-    
 
 }
