@@ -5,6 +5,7 @@ import java.util.Scanner;
 public class Usa_restaurant {
     public static void main(String []args){
         menuGarcon();
+        menuAberturaCaixa();
     }
 
     public static void menuGarcon(){
@@ -56,17 +57,22 @@ public class Usa_restaurant {
         }
     }
 
-    public static void menuAberturaCaixa(){
+    public static Caixa menuAberturaCaixa(){
         int acao;
         Scanner entrada = new Scanner(System.in);
+        Caixa c = new Caixa(0);
         while(true){
             System.out.println("\n--- Menu Abertura do caixa ---");
             System.out.println("\ninforme o numero da acao desejada: \n");
             System.out.println("1 - Informar montante inicial\n2 - Voltar para o menu principal");
             acao = entrada.nextInt();
-            if(acao == 1){}
-            else if(acao == 2){}
-            break;
+            if(acao == 1){
+                System.out.print("Informe o montante inicial: ");
+                c.setMontante(entrada.nextFloat());
+            }
+            else if(acao == 2){
+                return c;
+            }
         }
     }
     public static void menuMovimentar(){
