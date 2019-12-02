@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 
 public class Usa_restaurant {
@@ -6,17 +8,37 @@ public class Usa_restaurant {
     }
 
     public static void menuGarcon(){
+        // inicializando variavel para armazenar acao do usuario
         int acao;
+        // inicializando scanner para ler do teclado
         Scanner entrada = new Scanner(System.in);
+        // inicializando lista de garcons registrados no sistema
+        ArrayList<Garçom> gList = new ArrayList<Garçom>();
         while(true){
+            // menu interativo
             System.out.println("\n--- Menu Garcons ---");
             System.out.println("\ninforme o numero da acao desejada: \n");
             System.out.println("1 - Cadastrar garcom\n2 - Consultar garcons\n3 - Voltar para o menu principal");
             acao = entrada.nextInt();
-            if(acao == 1){}
-            else if(acao == 2){}
-            else if(acao ==3){}
-            break;
+            // acao de cadastro de garcom no sistema
+            if(acao == 1){
+                Garçom g = new Garçom("default", "default");
+                gList.add(g.cadastraGarcon());
+                continue;
+            }
+            // acao para listar garcons cadastrados
+            else if(acao == 2){
+                for(int i=0;i<gList.size();i++){ 
+                    System.out.println("Garcom "+(i+1));
+                    System.out.print("Nome: ");
+                    System.out.println(gList.get(i).getNome());
+                    System.out.print("Codigo: ");
+                    System.out.println(gList.get(i).getCodigo()+"\n");
+                    continue;  
+                }
+            }
+            // acao para caso o usuario decida voltar par ao menu principal
+            else if(acao == 3){return;}
         }
     }
     public static void menuProduto(){
