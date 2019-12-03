@@ -8,7 +8,8 @@ public class Usa_restaurant {
         menuAberturaCaixa();
     }
 
-    public static void menuGarcon(){
+    // menu de cadastro, returna uma lista de garcons
+    public static ArrayList menuGarcon(){
         // inicializando variavel para armazenar acao do usuario
         int acao;
         // inicializando scanner para ler do teclado
@@ -39,9 +40,10 @@ public class Usa_restaurant {
                 }
             }
             // acao para caso o usuario decida voltar par ao menu principal
-            else if(acao == 3){return;}
+            else if(acao == 3){return gList;}
         }
     }
+    //deve retornar ArrayList de produtos
     public static void menuProduto(){
         int acao;
         Scanner entrada = new Scanner(System.in);
@@ -50,13 +52,24 @@ public class Usa_restaurant {
             System.out.println("\ninforme o numero da acao desejada: \n");
             System.out.println("1 - Cadastrar Produtos\n2 - Consultar Produtos\n3 - Voltar para o menu principal");
             acao = entrada.nextInt();
-            if(acao == 1){}
+            if(acao == 1){
+                System.out.println("\ninforme o numero da acao desejada: \n");
+                System.out.println("Qual o tipo do produto?\n 1 - Bebida\n2 - Comida");
+                acao = entrada.nextInt();
+                if(acao==1){
+                    //cadastra comida
+                }
+                else if(acao==2){
+                    //cadastra bebida
+                }
+                continue;
+            }
             else if(acao == 2){}
             else if(acao ==3){}
             break;
         }
     }
-
+    // menu para abertura inicial do caixa
     public static Caixa menuAberturaCaixa(){
         int acao;
         Scanner entrada = new Scanner(System.in);
@@ -75,6 +88,7 @@ public class Usa_restaurant {
             }
         }
     }
+    // menu principal
     public static void menuMovimentar(){
         int acao;
         Scanner entrada = new Scanner(System.in);
@@ -95,7 +109,8 @@ public class Usa_restaurant {
             break;
         }
     }
-    public static void menuBalanco(){
+    // vai ler uma lista de comandas e listar seus dados
+    public static void menuBalanco(ArrayList comandas){
         int acao;
         Scanner entrada = new Scanner(System.in);
         while(true){
