@@ -1,4 +1,6 @@
-public class Comida implements Produto{
+import java.util.Scanner;
+
+public class Comida implements Produto {
 
 
     // declarando os atributos
@@ -38,6 +40,23 @@ public class Comida implements Produto{
     @Override
     public float getValor(){
         return valor_comida;
+    }
+
+    // cadastro de comida
+
+    public Comida cadastraComida(){
+        Scanner entrada = new Scanner(System.in);
+        String id_comida,descricao_comida;
+        float valor_comida;
+        System.out.print("Insira o id da comida: ");
+        id_comida = entrada.nextLine();
+        System.out.print("Insita a descricao da comida: ");
+        descricao_comida = entrada.nextLine();
+        System.out.print("Insita o valor da comida: ");
+        valor_comida = entrada.nextFloat();
+        Comida c = new Comida(id_comida,descricao_comida,valor_comida);
+        System.out.println("A comida "+descricao_comida+" foi cadastrado com sucesso!");
+        return c;
     }
     
 

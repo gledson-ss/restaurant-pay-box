@@ -4,8 +4,9 @@ import java.util.Scanner;
 
 public class Usa_restaurant {
     public static void main(String []args){
-        menuGarcon();
-        menuAberturaCaixa();
+        //menuGarcon();
+        //menuAberturaCaixa();
+        menuProduto();
     }
 
     // menu de cadastro, returna uma lista de garcons
@@ -44,29 +45,53 @@ public class Usa_restaurant {
         }
     }
     //deve retornar ArrayList de produtos
-    public static void menuProduto(){
+    public static ArrayList menuProduto(){
+        ArrayList<Produto> pList = new ArrayList<Produto>(); 
         int acao;
         Scanner entrada = new Scanner(System.in);
         while(true){
+            clearScreen();
             System.out.println("\n--- Menu Produtos ---");
             System.out.println("\ninforme o numero da acao desejada: \n");
             System.out.println("1 - Cadastrar Produtos\n2 - Consultar Produtos\n3 - Voltar para o menu principal");
             acao = entrada.nextInt();
             if(acao == 1){
+                clearScreen();
                 System.out.println("\ninforme o numero da acao desejada: \n");
-                System.out.println("Qual o tipo do produto?\n 1 - Bebida\n2 - Comida");
+                System.out.println("Qual o tipo do produto?\n1 - Bebida\n2 - Comida");
                 acao = entrada.nextInt();
                 if(acao==1){
-                    //cadastra comida
+                    clearScreen();
+                    Bebida b = new Bebida("default","default",0);
+                    pList.add(b.cadastraBebida());
                 }
                 else if(acao==2){
-                    //cadastra bebida
+                    clearScreen();
+                    Comida c = new Comida("default","default",0);
+                    pList.add(c.cadastraComida());
                 }
                 continue;
             }
-            else if(acao == 2){}
-            else if(acao ==3){}
-            break;
+            else if(acao == 2){
+                clearScreen();
+                for(int i=0;i<pList.size();i++){ 
+                    System.out.println("Produto "+(i+1));
+                    System.out.print("id: ");
+                    System.out.println(pList.get(i).getId_produto());
+                    System.out.print("descricao: ");
+                    System.out.println(pList.get(i).getDescricao());
+                    System.out.print("valor: ");
+                    System.out.println(pList.get(i).getValor());
+                }
+                int sair = 0;
+                while(sair!=1){
+                    System.out.println("Digite 1 para sair");
+                    sair = entrada.nextInt();
+                }
+            }
+            else if(acao ==3){
+                return pList;
+            }
         }
     }
     // menu para abertura inicial do caixa
@@ -122,6 +147,11 @@ public class Usa_restaurant {
             else if(acao == 2){}
             break;
         }
+    }
+
+    public static void clearScreen() {  
+        System.out.print("\033[H\033[2J");  
+        System.out.flush();  
     }
 
 }

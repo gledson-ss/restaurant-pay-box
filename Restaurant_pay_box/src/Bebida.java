@@ -1,4 +1,6 @@
-public class Bebida implements Produto{
+import java.util.Scanner;
+
+public class Bebida implements Produto {
 
 
     // declarando os atributos
@@ -44,5 +46,19 @@ public class Bebida implements Produto{
     public void setValor(float valor_bebida) {
         this.valor_bebida = valor_bebida;
 
+    }
+    public Bebida cadastraBebida(){
+        Scanner entrada = new Scanner(System.in);
+        String id_bebida,descricao_bebida;
+        float valor_bebida;
+        System.out.print("Insira o id da bebida: ");
+        id_bebida = entrada.nextLine();
+        System.out.print("Insita a descricao da bebida: ");
+        descricao_bebida = entrada.nextLine();
+        System.out.print("Insita o valor da bebida: ");
+        valor_bebida = entrada.nextFloat();
+        Bebida c = new Bebida(id_bebida,descricao_bebida,valor_bebida);
+        System.out.println("A bebida "+descricao_bebida+" foi cadastrado com sucesso!");
+        return c;
     }
 }
