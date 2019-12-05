@@ -1,16 +1,91 @@
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
 public class Usa_restaurant {
+    // menu principal
     public static void main(String []args){
-        //menuGarcon();
-        //menuAberturaCaixa();
-        menuProduto();
+
+        // definicao padrao de valores e estruturas
+        int acao;
+        Scanner entrada = new Scanner(System.in);
+        ArrayList<Garçom> gList = new ArrayList<Garçom>();
+        ArrayList<Produto> pList = new ArrayList<Produto>();
+        Caixa c = new Caixa(0);
+        DecimalFormat df = new DecimalFormat("0.00");
+
+
+        // realiza o cadastro inicial dos garcons e produtos
+        gList = menuGarcon();
+        pList = menuProduto();
+        // inicializa o caixa            
+        c = menuAberturaCaixa();
+
+        // inicia menu principal
+        while(true){
+            String conta;
+            String garcon;
+            String codigo;
+            System.out.println("\n--- Menu Movimentar ---");
+            System.out.println("\ninforme o numero da acao desejada: \n");
+            System.out.println("1 - Nova conta\n2 - Cadastrar novo garcon\n3 - Cadastrar novo produto\n4 - Sair do programa");
+            acao = entrada.nextInt();
+            if(acao==1){
+                clearScreen();
+                // nova conta
+                float total=0;
+                float percentualGarcon=0;
+                while(acao==1){
+                    System.out.println("\ninforme o numero da conta: ");
+                    conta = entrada.nextLine();
+                    System.out.print("\ninforme o codigo do garcon: ");
+                    garcon = entrada.nextLine();
+                    System.out.println("\ninforme o numero da acao desejada: \n");
+                    Comanda co = new Comanda(conta,garcon);
+                    clearScreen();
+                    System.out.println("1 - Adicionar item consumido\n2 - Subtotal da conta\n3 - Cancelar e voltar para o menu");
+                    acao = entrada.nextInt();
+                    if(acao == 1){
+                        clearScreen();
+                        System.out.println("informe o codigo do item consumido: ");
+                        codigo = entrada.nextLine();
+                        for(int i = 0; i<pList.size(); i++){
+                            if(pList.get(i).getId_produto()==codigo){
+                                total += pList.get(i).getValor();
+                            }
+                        }
+                        continue;
+                    }
+                    else if(acao == 2){
+                        clearScreen();
+                        float valor_pago;
+                        float troco;
+                        System.out.println("O subtotal consumido foi de "+(df.format(total)));
+                        System.out.println("O valor dos 10% do garconfoi de: "+df.format((total*10)/100));
+                        System.out.println("O total consumido com os 10% foi de "+((df.format(total))+df.format((total*10)/100)));
+                        total = total + ((total*10)/100);
+                        System.out.print("Informe o valor pago pelo cliente: ");
+                        valor_pago = entrada.nextFloat();
+                        troco = total - valor_pago;
+                        if(troco<0){
+                            System.out.println("informe um troco valido");
+                        }
+                        else{
+                            System.out.println("O troco vai ser de: "+troco);
+                        }
+                        espera();
+
+                    }
+                    else if(acao ==3){break;}
+                }
+        }
+            break;
+        }
     }
 
     // menu de cadastro, returna uma lista de garcons
-    public static ArrayList menuGarcon(){
+    public static ArrayList<Garçom> menuGarcon(){
         // inicializando variavel para armazenar acao do usuario
         int acao;
         // inicializando scanner para ler do teclado
@@ -19,18 +94,22 @@ public class Usa_restaurant {
         ArrayList<Garçom> gList = new ArrayList<Garçom>();
         while(true){
             // menu interativo
+            clearScreen();
             System.out.println("\n--- Menu Garcons ---");
             System.out.println("\ninforme o numero da acao desejada: \n");
             System.out.println("1 - Cadastrar garcom\n2 - Consultar garcons\n3 - Voltar para o menu principal");
             acao = entrada.nextInt();
             // acao de cadastro de garcom no sistema
             if(acao == 1){
+                clearScreen();
                 Garçom g = new Garçom("default", "default");
                 gList.add(g.cadastraGarcon());
+                espera();
                 continue;
             }
             // acao para listar garcons cadastrados
             else if(acao == 2){
+                clearScreen();
                 for(int i=0;i<gList.size();i++){ 
                     System.out.println("Garcom "+(i+1));
                     System.out.print("Nome: ");
@@ -39,13 +118,17 @@ public class Usa_restaurant {
                     System.out.println(gList.get(i).getCodigo()+"\n");
                     continue;  
                 }
+                espera();
             }
             // acao para caso o usuario decida voltar par ao menu principal
-            else if(acao == 3){return gList;}
+            else if(acao == 3){
+                clearScreen();
+                return gList;
+            }
         }
     }
     //deve retornar ArrayList de produtos
-    public static ArrayList menuProduto(){
+    public static ArrayList<Produto> menuProduto(){
         ArrayList<Produto> pList = new ArrayList<Produto>(); 
         int acao;
         Scanner entrada = new Scanner(System.in);
@@ -84,10 +167,7 @@ public class Usa_restaurant {
                     System.out.println(pList.get(i).getValor());
                 }
                 int sair = 0;
-                while(sair!=1){
-                    System.out.println("Digite 1 para sair");
-                    sair = entrada.nextInt();
-                }
+                espera();
             }
             else if(acao ==3){
                 return pList;
@@ -96,6 +176,7 @@ public class Usa_restaurant {
     }
     // menu para abertura inicial do caixa
     public static Caixa menuAberturaCaixa(){
+        clearScreen();
         int acao;
         Scanner entrada = new Scanner(System.in);
         Caixa c = new Caixa(0);
@@ -105,34 +186,19 @@ public class Usa_restaurant {
             System.out.println("1 - Informar montante inicial\n2 - Voltar para o menu principal");
             acao = entrada.nextInt();
             if(acao == 1){
+                clearScreen();
                 System.out.print("Informe o montante inicial: ");
                 c.setMontante(entrada.nextFloat());
             }
             else if(acao == 2){
+                clearScreen();
                 return c;
             }
         }
     }
     // menu principal
     public static void menuMovimentar(){
-        int acao;
-        Scanner entrada = new Scanner(System.in);
-        while(true){
-            int conta;
-            String garcon;
-            System.out.println("\n--- Menu Movimentar ---");
-            System.out.print("\ninforme o numero da conta: ");
-            conta = entrada.nextInt();
-            System.out.print("\ninforme o codigo do garcon: ");
-            garcon = entrada.nextLine();
-            System.out.println("\ninforme o numero da acao desejada: \n");
-            System.out.println("1 - Adicionar item consumido\n2 - Alterar garcon\n3 - Voltar para o menu principal");
-            acao = entrada.nextInt();
-            if(acao == 1){}
-            else if(acao == 2){}
-            else if(acao ==3){}
-            break;
-        }
+
     }
     // vai ler uma lista de comandas e listar seus dados
     public static void menuBalanco(ArrayList comandas){
@@ -152,6 +218,14 @@ public class Usa_restaurant {
     public static void clearScreen() {  
         System.out.print("\033[H\033[2J");  
         System.out.flush();  
+    }
+    public static void espera() {
+        Scanner entrada = new Scanner(System.in);
+        int sair = 0;
+        while(sair!=1){
+            System.out.println("Digite 1 para voltar");
+            sair = entrada.nextInt();
+        }
     }
 
 }
