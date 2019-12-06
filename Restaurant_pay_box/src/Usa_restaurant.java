@@ -13,7 +13,7 @@ public class Usa_restaurant {
         ArrayList<Garçom> gList = new ArrayList<Garçom>();
         ArrayList<Produto> pList = new ArrayList<Produto>();
         Caixa c = new Caixa(0);
-        DecimalFormat df = new DecimalFormat("0.00");
+        DecimalFormat df = new DecimalFormat("#.00");
 
 
         // realiza o cadastro inicial dos garcons e produtos
@@ -27,9 +27,10 @@ public class Usa_restaurant {
             String conta;
             String garcon;
             String codigo;
+            clearScreen();
             System.out.println("\n--- Menu Movimentar ---");
             System.out.println("\ninforme o numero da acao desejada: \n");
-            System.out.println("1 - Nova conta\n2 - Cadastrar novo garcon\n3 - Cadastrar novo produto\n4 - Sair do programa");
+            System.out.println("1 - Nova conta\n2 - Cadastrar novo garcon\n3 - Cadastrar novo produto\n4 - Fornecer balanco\n5 - Sair do programa");
             acao = entrada.nextInt();
             if(acao==1){
                 clearScreen();
@@ -37,50 +38,72 @@ public class Usa_restaurant {
                 float total=0;
                 float percentualGarcon=0;
                 while(acao==1){
-                    System.out.println("\ninforme o numero da conta: ");
-                    conta = entrada.nextLine();
-                    System.out.print("\ninforme o codigo do garcon: ");
-                    garcon = entrada.nextLine();
-                    System.out.println("\ninforme o numero da acao desejada: \n");
-                    Comanda co = new Comanda(conta,garcon);
-                    clearScreen();
-                    System.out.println("1 - Adicionar item consumido\n2 - Subtotal da conta\n3 - Cancelar e voltar para o menu");
-                    acao = entrada.nextInt();
-                    if(acao == 1){
+                    System.out.println("informe o numero da conta: ");
+                    conta = entrada.next();
+                    System.out.println("\ninforme o codigo do garcon: ");
+                    garcon = entrada.next();
+                    while(true){
+                        System.out.println("\ninforme o numero da acao desejada: \n");
+                        Comanda co = new Comanda(conta,garcon);
                         clearScreen();
-                        System.out.println("informe o codigo do item consumido: ");
-                        codigo = entrada.nextLine();
-                        for(int i = 0; i<pList.size(); i++){
-                            if(pList.get(i).getId_produto()==codigo){
-                                total += pList.get(i).getValor();
+                        System.out.println("1 - Adicionar item consumido\n2 - Subtotal da conta\n3 - Cancelar e criar nova conta");
+                        acao = entrada.nextInt();
+                        if(acao == 1){
+                            clearScreen();
+                            System.out.println("informe o codigo do item consumido: ");
+                            codigo = entrada.next();
+                            for(int i = 0; i<pList.size(); i++){
+                                if(pList.get(i).getId_produto().equals(codigo)){
+                                    total += pList.get(i).getValor();
+                                    System.out.println(pList.get(i).getDescricao()+" foi adicionado!");
+                                }
                             }
+                            continue;
                         }
-                        continue;
-                    }
-                    else if(acao == 2){
-                        clearScreen();
-                        float valor_pago;
-                        float troco;
-                        System.out.println("O subtotal consumido foi de "+(df.format(total)));
-                        System.out.println("O valor dos 10% do garconfoi de: "+df.format((total*10)/100));
-                        System.out.println("O total consumido com os 10% foi de "+((df.format(total))+df.format((total*10)/100)));
-                        total = total + ((total*10)/100);
-                        System.out.print("Informe o valor pago pelo cliente: ");
-                        valor_pago = entrada.nextFloat();
-                        troco = total - valor_pago;
-                        if(troco<0){
-                            System.out.println("informe um troco valido");
-                        }
-                        else{
-                            System.out.println("O troco vai ser de: "+troco);
-                        }
-                        espera();
+                        else if(acao == 2){
+                            clearScreen();
+                            float valor_pago;
+                            float troco;
+                            System.out.println("O subtotal consumido foi de "+(df.format(total)));
+                            System.out.println("O valor dos 10% do garconfoi de: "+df.format((total*10)/100));
+                            System.out.println("O total consumido com os 10% foi de "+((df.format(total*1.1))));
+                            total = total + ((total*10)/100);
+                            c.setNovoMontante(total);
+                            System.out.print("Informe o valor pago pelo cliente: ");
+                            valor_pago = entrada.nextFloat();
+                            troco = valor_pago - total;
+                            if(troco<0){
+                                System.out.println("informe um troco valido");
+                            }
+                            else{
+                                System.out.println("O troco vai ser de: "+troco);
+                            }
+                            c.novoRegistro(conta, total);
+                            espera();
+                            clearScreen();
+                            break;
 
+                        }
+                        else if(acao == 3){break;}
+                        else{
+                            continue;
+                        }
                     }
-                    else if(acao ==3){break;}
                 }
-        }
-            break;
+                
+            }
+            else if(acao==2){
+                menuGarcon();
+            }
+            else if(acao==3){
+                menuProduto();
+            }
+            else if(acao==4){
+                menuBalanco(c);
+            }
+            else if(acao==5){
+                break;
+            }
         }
     }
 
@@ -97,7 +120,7 @@ public class Usa_restaurant {
             clearScreen();
             System.out.println("\n--- Menu Garcons ---");
             System.out.println("\ninforme o numero da acao desejada: \n");
-            System.out.println("1 - Cadastrar garcom\n2 - Consultar garcons\n3 - Voltar para o menu principal");
+            System.out.println("1 - Cadastrar garcom\n2 - Consultar garcons\n3 - Finalizar");
             acao = entrada.nextInt();
             // acao de cadastro de garcom no sistema
             if(acao == 1){
@@ -136,7 +159,7 @@ public class Usa_restaurant {
             clearScreen();
             System.out.println("\n--- Menu Produtos ---");
             System.out.println("\ninforme o numero da acao desejada: \n");
-            System.out.println("1 - Cadastrar Produtos\n2 - Consultar Produtos\n3 - Voltar para o menu principal");
+            System.out.println("1 - Cadastrar Produtos\n2 - Consultar Produtos\n3 - Finalizar");
             acao = entrada.nextInt();
             if(acao == 1){
                 clearScreen();
@@ -183,7 +206,7 @@ public class Usa_restaurant {
         while(true){
             System.out.println("\n--- Menu Abertura do caixa ---");
             System.out.println("\ninforme o numero da acao desejada: \n");
-            System.out.println("1 - Informar montante inicial\n2 - Voltar para o menu principal");
+            System.out.println("1 - Informar montante inicial\n2 - Finalizar");
             acao = entrada.nextInt();
             if(acao == 1){
                 clearScreen();
@@ -196,22 +219,23 @@ public class Usa_restaurant {
             }
         }
     }
-    // menu principal
-    public static void menuMovimentar(){
 
-    }
-    // vai ler uma lista de comandas e listar seus dados
-    public static void menuBalanco(ArrayList comandas){
+    public static void menuBalanco(Caixa c){
         int acao;
         Scanner entrada = new Scanner(System.in);
         while(true){
+            clearScreen();
             System.out.println("\n--- Menu Balanco do caixa ---");
             System.out.println("\ninforme o numero da acao desejada: \n");
             System.out.println("1 - Informar movimentacao atual\n2 - Voltar para o menu principal");
             acao = entrada.nextInt();
-            if(acao == 1){}
-            else if(acao == 2){}
-            break;
+            if(acao == 1){
+                c.registroMomento();
+                espera();
+            }
+            else if(acao == 2){
+                break;
+            }
         }
     }
 

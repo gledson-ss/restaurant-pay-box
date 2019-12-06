@@ -50,9 +50,9 @@ public class Comida implements Produto {
         float valor_comida;
         System.out.print("Insira o id da comida: ");
         id_comida = entrada.nextLine();
-        System.out.print("Insita a descricao da comida: ");
+        System.out.print("Insira a descricao da comida: ");
         descricao_comida = entrada.nextLine();
-        System.out.print("Insita o valor da comida: ");
+        System.out.print("Insira o valor da comida: ");
         valor_comida = entrada.nextFloat();
         Comida c = new Comida(id_comida,descricao_comida,valor_comida);
         System.out.println("A comida "+descricao_comida+" foi cadastrado com sucesso!");
