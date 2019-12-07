@@ -1,0 +1,20 @@
+-- Breve Manual de utilização do sistema --
+
+Inicialização:
+    No momento em que o sistema é aberto são inicializados dois menus, primeiro o de Cadastro de Garçons e em seguida o de produtos
+Cadastro de Garçons:
+    Faça o cadastro dos garçons do estabelecimento
+    Você pode consultar os garçons cadastrados
+    Após finalizar o cadastro, digite para finalizar
+Cadastro de produtos:
+    Faça o cadastro dos produtos do estabelecimento, explicitando se é uma comida ou bebida
+    Você pode consultar os produtos cadastrados
+    Após finalizar o cadastro, digite para finalizar
+
+Abertura do Caixa:
+    Após cadastrar os garcons e comidas, informe o montante inicial e finalize a operação para seguir
+
+Menu Movimentar
+    Aqui é onde você irá fazer todas as operações desejadas, inclusive pode cadastrar novos garcons e produtos
+    Após finalizar o cadastro de uma conta, você pode consultar o novo balanço do caixa
+    Para finalizar o programa, basta selecionar a ultima opção do menu
