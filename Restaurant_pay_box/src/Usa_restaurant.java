@@ -219,7 +219,7 @@ public class Usa_restaurant {
             }
         }
     }
-
+    //menu para informar coisas do caixa
     public static void menuBalanco(Caixa c){
         int acao;
         Scanner entrada = new Scanner(System.in);
